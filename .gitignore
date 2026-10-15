@@ -1,0 +1,10 @@
+bin/
+dist/
+vendor/
+build-docs.txt
+
+.env
+.envrc
+.idea/
+.vscode/
+.DS_Store

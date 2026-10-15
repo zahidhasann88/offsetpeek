@@ -1,0 +1,64 @@
+# Local Kafka (KRaft) plus a one-shot `seed` job: topic `orders` (4 partitions),
+# 1000 messages, 600 consumed by group `payments`.
+#
+#   docker compose up -d
+#   docker compose --profile live up -d live-consumer   # keep `payments` active
+#
+# Host clients use localhost:9092; containers use kafka:29092.
+
+services:
+  kafka:
+    image: ${KAFKA_IMAGE:-confluentinc/confluent-local:7.5.0}
+    container_name: offsetpeek-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:29093"
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:29092,CONTROLLER://0.0.0.0:29093,PLAINTEXT_HOST://0.0.0.0:9092"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
+      CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions --bootstrap-server kafka:29092 > /dev/null 2>&1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+
+  seed:
+    image: ${KAFKA_IMAGE:-confluentinc/confluent-local:7.5.0}
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        set -euo pipefail
+        B=kafka:29092
+        kafka-topics --bootstrap-server $$B --create --if-not-exists \
+          --topic orders --partitions 4 --replication-factor 1
+        for i in $$(seq 1 1000); do
+          echo "user-$$((i % 50))|{\"order_id\":$$i,\"amount\":\"1.23\"}"
+        done | kafka-console-producer --bootstrap-server $$B --topic orders \
+          --property parse.key=true --property key.separator='|'
+        kafka-console-consumer --bootstrap-server $$B --topic orders \
+          --group payments --from-beginning --max-messages 600 > /dev/null
+        echo "seeded: topic orders, group payments"
+    restart: "no"
+
+  live-consumer:
+    profiles: ["live"]
+    image: ${KAFKA_IMAGE:-confluentinc/confluent-local:7.5.0}
+    depends_on:
+      kafka:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - kafka-console-consumer --bootstrap-server kafka:29092 --topic orders --group payments > /dev/null
