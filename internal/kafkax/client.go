@@ -14,7 +14,7 @@ import (
 	"github.com/twmb/franz-go/pkg/sasl/plain"
 	"github.com/twmb/franz-go/pkg/sasl/scram"
 
-	"github.com/example/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
 )
 
 type Config struct {

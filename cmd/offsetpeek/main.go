@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/example/offsetpeek/internal/cmd"
+	"github.com/zahidhasann88/offsetpeek/internal/cmd"
 )
 
 // version is set at release time via -ldflags "-X main.version=...".

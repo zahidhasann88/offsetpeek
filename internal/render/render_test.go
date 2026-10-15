@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 func sampleReport() Report {

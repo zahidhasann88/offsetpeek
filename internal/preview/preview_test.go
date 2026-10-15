@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/example/offsetpeek/internal/admin"
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 func TestRun_HappyEarliest(t *testing.T) {

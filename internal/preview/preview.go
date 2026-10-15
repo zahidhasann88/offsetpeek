@@ -12,9 +12,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/example/offsetpeek/internal/admin"
-	"github.com/example/offsetpeek/internal/render"
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/render"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 // DefaultOffsetsFile is the --from-file name used in the printed command

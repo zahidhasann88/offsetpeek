@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 type ActiveMembers struct {

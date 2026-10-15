@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/example/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
 )
 
 type Kind int

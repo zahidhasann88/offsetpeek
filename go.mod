@@ -1,4 +1,4 @@
-module github.com/example/offsetpeek
+module github.com/zahidhasann88/offsetpeek
 
 go 1.26.0
 

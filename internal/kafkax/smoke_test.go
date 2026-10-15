@@ -9,9 +9,9 @@ import (
 	"github.com/twmb/franz-go/pkg/kfake"
 	"github.com/twmb/franz-go/pkg/kgo"
 
-	"github.com/example/offsetpeek/internal/admin"
-	"github.com/example/offsetpeek/internal/preview"
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/preview"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 func TestSmoke_RealKadmAgainstKfakeCluster(t *testing.T) {

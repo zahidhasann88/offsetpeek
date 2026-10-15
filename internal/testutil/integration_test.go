@@ -1,7 +1,3 @@
-//go:build integration
-
-// Package testutil holds the real-Kafka integration test (testcontainers-go).
-// Enable with -tags=integration; skip with -short.
 package testutil
 
 import (
@@ -14,10 +10,10 @@ import (
 	"github.com/twmb/franz-go/pkg/kadm"
 	"github.com/twmb/franz-go/pkg/kgo"
 
-	"github.com/example/offsetpeek/internal/admin"
-	"github.com/example/offsetpeek/internal/kafkax"
-	"github.com/example/offsetpeek/internal/preview"
-	"github.com/example/offsetpeek/internal/reset"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/kafkax"
+	"github.com/zahidhasann88/offsetpeek/internal/preview"
+	"github.com/zahidhasann88/offsetpeek/internal/reset"
 )
 
 const kafkaImage = "confluentinc/confluent-local:7.5.0"

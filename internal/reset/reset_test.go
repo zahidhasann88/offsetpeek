@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/example/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
 )
 
 const none = admin.NoOffset

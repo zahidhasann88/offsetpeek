@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/example/offsetpeek/internal/admin"
-	"github.com/example/offsetpeek/internal/kafkax"
+	"github.com/zahidhasann88/offsetpeek/internal/admin"
+	"github.com/zahidhasann88/offsetpeek/internal/kafkax"
 )
 
 func withExecutor(t *testing.T, fn executorFunc) {

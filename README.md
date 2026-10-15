@@ -10,7 +10,7 @@ Built with Go, [franz-go](https://github.com/twmb/franz-go) and
 ## Install
 
 ```sh
-go install github.com/example/offsetpeek/cmd/offsetpeek@latest
+go install github.com/zahidhasann88/offsetpeek/cmd/offsetpeek@latest
 ```
 
 Or download a binary from the Releases page.
